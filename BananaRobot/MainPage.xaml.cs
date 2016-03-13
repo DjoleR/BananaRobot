@@ -23,11 +23,18 @@ namespace BananaRobot
     public sealed partial class MainPage : Page
     {
         Robot r;
+        private DispatcherTimer timer;
+        private TemperatureSensor ts = new TemperatureSensor();
         public MainPage()
         {
             this.InitializeComponent();
 
             r = new Robot();
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Tick += Timer_Tick;
+            timer.Start();
 
         }
 
@@ -40,5 +47,11 @@ namespace BananaRobot
         {
             r.Stop();
         }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            this.tempTextBlock.Text = "Current tmp: " + ts.gimmeTemperature().ToString();
+        }
+
     }
 }
