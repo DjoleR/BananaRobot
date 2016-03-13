@@ -75,12 +75,12 @@ namespace BananaRobot
                 return;
 
 
-            Move();
+            Move(1,-1);
         }
 
-        private void Move()
+        public void Move(int dx, int dy)
         {
-            int dx = 1, dy = -1, i;
+            int i;
             bool dx_move = false, dy_move = false;
             List<int> movement = new List<int>() { -1, 1, 1, -1, 0, 1, 1, 1, -1, 0, 1, -1 };
 

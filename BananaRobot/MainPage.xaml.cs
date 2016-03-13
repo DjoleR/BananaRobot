@@ -22,12 +22,17 @@ namespace BananaRobot
     {
         Robot r;
         private DispatcherTimer timer;
-        private TemperatureSensor ts = new TemperatureSensor();
+        private TemperatureSensor ts;
+        private RobotAI ai;
+
         public MainPage()
         {
             this.InitializeComponent();
 
             r = new Robot();
+            ts = new TemperatureSensor();
+
+            ai = new PredictBot(200, 200);
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(500);
@@ -48,7 +53,30 @@ namespace BananaRobot
 
         private void Timer_Tick(object sender, object e)
         {
-            this.tempTextBlock.Text = "Current tmp: " + ts.gimmeTemperature().ToString();
+            string tempStr = ts.gimmeTemperature().ToString();
+            this.tempTextBlock.Text = "Current tmp: " + tempStr;
+            int temp = Int32.Parse(tempStr);
+            AIWorld.Direction aiDir = ai.MakeMove(temp);
+            MoveWithDir(aiDir);
+        }
+
+        private void MoveWithDir(AIWorld.Direction dir)
+        {
+            switch (dir)
+            {
+                case AIWorld.Direction.DOWN:
+                    r.Move(-1, 0);
+                    break;
+                case AIWorld.Direction.UP:
+                    r.Move(1, 0);
+                    break;
+                case AIWorld.Direction.LEFT:
+                    r.Move(-1, 0);
+                    break;
+                case AIWorld.Direction.RIGHT:
+                    r.Move(1, 0);
+                    break;
+            }
         }
 
     }
