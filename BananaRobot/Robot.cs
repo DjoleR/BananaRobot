@@ -17,11 +17,20 @@ namespace BananaRobot
         private bool isValid = false;
         private bool isOn = false;
         private Random rand = new Random();
+        private static int maxID = 0;
+        private int ID;
 
         public Robot()
         {
             isOn = true;
             InitPins();
+            this.ID = Robot.maxID + 1;
+            Robot.maxID++;
+        }
+
+        public int getId()
+        {
+            return this.ID;
         }
 
         private void Reset()
