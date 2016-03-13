@@ -38,17 +38,23 @@ namespace BananaRobot
             timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += Timer_Tick;
             timer.Start();
-
+            r.Start();
         }
 
         private void start_Click(object sender, RoutedEventArgs e)
         {
-            r.Start();
+            if (!timer.IsEnabled)
+            {
+                timer.Start();
+                r.Start();
+            }
+            //r.Start();
         }
 
         private void stop_Click(object sender, RoutedEventArgs e)
         {
             r.Stop();
+            timer.Stop();
         }
 
         private void Timer_Tick(object sender, object e)
