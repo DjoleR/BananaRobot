@@ -24,6 +24,7 @@ namespace BananaRobot
         private DispatcherTimer timer;
         private TemperatureSensor ts;
         private RobotAI ai;
+        private int lastKnownX, lastKnownY;
 
         public MainPage()
         {
@@ -33,6 +34,7 @@ namespace BananaRobot
             ts = new TemperatureSensor();
 
             ai = new PredictBot(400, 400);
+            lastKnownX = lastKnownY = 0;
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(500);
@@ -64,6 +66,8 @@ namespace BananaRobot
             int temp = Int32.Parse(tempStr);
             AIWorld.Direction aiDir = ai.MakeMove(temp);
             MoveWithDir(aiDir);
+            this.messageTextBlock.Text = CommunicationService.PrepareAndSendMessage(r.getId(), "Banana Super Robot", tempStr, lastKnownX, lastKnownY, DateTime.Now.ToString());
+
         }
 
         private void MoveWithDir(AIWorld.Direction dir)
@@ -72,15 +76,19 @@ namespace BananaRobot
             {
                 case AIWorld.Direction.DOWN:
                     r.Move(-1, 0);
+                    lastKnownX--;
                     break;
                 case AIWorld.Direction.UP:
+                    lastKnownX++;
                     r.Move(1, 0);
                     break;
                 case AIWorld.Direction.LEFT:
-                    r.Move(-1, 0);
+                    lastKnownY--;
+                    r.Move(0, -1);
                     break;
                 case AIWorld.Direction.RIGHT:
-                    r.Move(1, 0);
+                    lastKnownY++;
+                    r.Move(0, 1);
                     break;
             }
         }
