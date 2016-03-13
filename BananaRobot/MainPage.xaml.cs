@@ -22,9 +22,23 @@ namespace BananaRobot
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        Robot r;
         public MainPage()
         {
             this.InitializeComponent();
+
+            r = new Robot();
+
+        }
+
+        private void start_Click(object sender, RoutedEventArgs e)
+        {
+            r.Start();
+        }
+
+        private void stop_Click(object sender, RoutedEventArgs e)
+        {
+            r.Stop();
         }
     }
 }
