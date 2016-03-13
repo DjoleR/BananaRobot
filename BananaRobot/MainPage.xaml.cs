@@ -32,7 +32,7 @@ namespace BananaRobot
             r = new Robot();
             ts = new TemperatureSensor();
 
-            ai = new PredictBot(200, 200);
+            ai = new PredictBot(400, 400);
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(500);
