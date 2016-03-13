@@ -109,6 +109,7 @@
     <Compile Include="Robot.cs" />
     <Compile Include="RobotAI.cs" />
     <Compile Include="TemperatureSensor.cs" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

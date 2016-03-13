@@ -33,11 +33,11 @@ namespace BananaRobot
             r = new Robot();
             ts = new TemperatureSensor();
 
-            ai = new PredictBot(200, 200);
+            ai = new PredictBot(1000, 1000);
             lastKnownX = lastKnownY = 0;
 
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += Timer_Tick;
             timer.Start();
             r.Start();
